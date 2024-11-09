@@ -3,21 +3,6 @@
  * @author Puji Ermanto <pujiermanto@gmail.com>
  * @return callback
  * */
-
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header('Content-Type: application/json');
-header('Accept: application/json');
-// Cek apakah permintaan adalah OPTIONS dan respon dengan status 200 untuk preflight
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-	header("Access-Control-Allow-Origin: *");
-	header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-	header('Content-Type: application/json');
-	header('Accept: application/json');
-	http_response_code(200);
-	exit;
-}
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
