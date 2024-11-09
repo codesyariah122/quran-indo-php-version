@@ -1,4 +1,7 @@
 <?php
+/**
+ * @author Puji Ermanto <pujiermanto@gmail.com>
+ * */
 require_once __DIR__ . '/../config/autoload.php';
 
 use Controllers\QuranController;
