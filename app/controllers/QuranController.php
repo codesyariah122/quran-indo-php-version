@@ -19,6 +19,15 @@ class QuranController extends Controller {
         $dotenv->load();
     }
 
+    public function options() {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type"); 
+        header('Content-Type: application/json');
+        http_response_code(200);
+        exit;
+    }
+
     public function index() {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
@@ -62,7 +71,7 @@ class QuranController extends Controller {
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
         header('Content-Type: application/json');
         header('Accept: application/json');
-        
+
         $model = $this->model('QuranModel');
         $data = $model->getListSurah();
         echo json_encode($data);

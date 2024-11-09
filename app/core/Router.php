@@ -5,7 +5,13 @@
  */
 
 class Router {
+
 	public static function route() {
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+		header('Content-Type: application/json');
+		header('Accept: application/json');
+		
 		$url = $_SERVER['REQUEST_URI'];
 		$url = rtrim($url, '/');
 
