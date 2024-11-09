@@ -1,13 +1,38 @@
 <?php
-/**
- * @author Puji Ermanto <pujiermanto@gmail.com>
- * @return callback
- * */
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once __DIR__ . '/../config/autoload.php';
 
-require_once __DIR__ . '/../app/core/Router.php';
+use Controllers\QuranController;
 
-Router::route();
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 
+$controller = new QuranController();
+
+$uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+
+switch ($uri[0]) {
+    case 'home':
+    $controller->home();
+    break;
+    case 'quran':
+    if (isset($uri[1])) {
+        $controller->getSurah($uri[1]);
+    } else {
+        http_response_code(404);
+    }
+    break;
+    case 'surah':
+    if (isset($uri[1]) && isset($uri[2])) {
+        $controller->getAyat($uri[1], $uri[2]);
+    } else {
+        http_response_code(404);
+    }
+    break;
+    case 'list-surah':
+    $controller->listSurah();
+    break;
+    default:
+    echo json_encode(['message' => 'Endpoint not found']);
+    http_response_code(404);
+    break;
+}
