@@ -33,6 +33,10 @@ class QuranController extends Controller {
 
     // Endpoint untuk menampilkan data dasar
     public function index() {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type");
+
         echo json_encode([
             "message" => "Welcome to Al-Quran API",
             "author" => "Puji Ermanto",
@@ -45,22 +49,51 @@ class QuranController extends Controller {
 
     // Endpoint untuk menampilkan surah tertentu berdasarkan nomor
     public function surah($number) {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type");
+
         $model = $this->model('QuranModel');
         $data = $model->getSurah($number);
+
+        if (!$data) {
+            echo json_encode(["error" => "Data not found"]);
+            return;
+        }
+        
         echo json_encode($data);
     }
 
     // Endpoint untuk menampilkan ayat berdasarkan nomor surah dan ayat
     public function ayat($number, $ayat) {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type");
+
         $model = $this->model('QuranModel');
         $data = $model->getAyat($number, $ayat);
+        if (!$data) {
+            echo json_encode(["error" => "Data not found"]);
+            return;
+        }
+
         echo json_encode($data);
     }
 
     // Endpoint untuk menampilkan daftar surah
     public function listSurah() {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type");
+
         $model = $this->model('QuranModel');
         $data = $model->getListSurah();
+
+        if (!$data) {
+            echo json_encode(["error" => "Data not found"]);
+            return;
+        }
+
         echo json_encode($data);
     }
 }
