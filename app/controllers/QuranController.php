@@ -10,6 +10,9 @@ use Dotenv\Dotenv;
 
 class QuranController extends Controller {
     public function __construct() {
+        header('Content-Type: application/json');
+        header('Accept: application/json');
+        
         $dotenv = Dotenv::createImmutable('../');
         $dotenv->load();
     }
