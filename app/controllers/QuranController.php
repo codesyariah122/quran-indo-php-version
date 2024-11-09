@@ -9,12 +9,16 @@ require_once '../vendor/autoload.php';
 use Dotenv\Dotenv;
 
 class QuranController extends Controller {
+
     public function __construct() {
+        // Menambahkan header CORS untuk akses dari frontend
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type");
         header('Content-Type: application/json');
         header('Accept: application/json');
-
+        
+        // Memuat file .env jika perlu
         $dotenv = Dotenv::createImmutable('../');
         $dotenv->load();
     }
@@ -22,21 +26,16 @@ class QuranController extends Controller {
     public function options() {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-        header("Access-Control-Allow-Headers: Content-Type"); 
-        header('Content-Type: application/json');
+        header("Access-Control-Allow-Headers: Content-Type");
         http_response_code(200);
         exit;
     }
 
+    // Endpoint untuk menampilkan data dasar
     public function index() {
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-        header('Content-Type: application/json');
-        header('Accept: application/json');
-
         echo json_encode([
-            "author" => "Puji Ermanto <pujiermanto@gmail.com>",
-            "message" => "Welcome to AlQuran Indo",
+            "message" => "Welcome to Al-Quran API",
+            "author" => "Puji Ermanto",
             "api" => [
                 "surah" => "/quran/:number",
                 "ayat" => "/surah/:number/:ayat"
@@ -44,34 +43,22 @@ class QuranController extends Controller {
         ]);
     }
 
+    // Endpoint untuk menampilkan surah tertentu berdasarkan nomor
     public function surah($number) {
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-        header('Content-Type: application/json');
-        header('Accept: application/json');
-
         $model = $this->model('QuranModel');
         $data = $model->getSurah($number);
         echo json_encode($data);
     }
 
+    // Endpoint untuk menampilkan ayat berdasarkan nomor surah dan ayat
     public function ayat($number, $ayat) {
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-        header('Content-Type: application/json');
-        header('Accept: application/json');
-
         $model = $this->model('QuranModel');
         $data = $model->getAyat($number, $ayat);
         echo json_encode($data);
     }
 
+    // Endpoint untuk menampilkan daftar surah
     public function listSurah() {
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-        header('Content-Type: application/json');
-        header('Accept: application/json');
-
         $model = $this->model('QuranModel');
         $data = $model->getListSurah();
         echo json_encode($data);
