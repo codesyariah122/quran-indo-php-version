@@ -7,4 +7,4 @@ Header set Access-Control-Allow-Headers "Content-Type"
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,Ls
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,Ls]
