@@ -2,6 +2,9 @@
 /**
  * @author Puji Ermanto <pujiermanto@gmail.com>
  * */
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 require_once __DIR__ . '/../config/autoload.php';
 
 use Controllers\QuranController;
