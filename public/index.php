@@ -9,9 +9,6 @@ require_once __DIR__ . '/../config/autoload.php';
 
 use Controllers\QuranController;
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json");
-
 $controller = new QuranController();
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -22,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-$uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+$uri = explode('/', trim(str_replace('/quran-indo', '', $_SERVER['REQUEST_URI']), '/'));
 
 switch ($uri[0]) {
     case 'home':
