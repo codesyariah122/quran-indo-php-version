@@ -46,7 +46,7 @@ switch ($uri[0]) {
     $controller->listSurah();
     break;
     default:
-    echo json_encode(['message' => 'Endpoint not found']);
+    $controller->emptyEndPoint();
     http_response_code(404);
     break;
 }
