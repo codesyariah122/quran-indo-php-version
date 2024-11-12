@@ -1,6 +1,8 @@
 <?php
-// /config/autoload.php
-
+/**
+ * @author Puji Ermanto <pujiermanto@gmail.com>
+ * @return FILE
+ * */
 spl_autoload_register(function ($class) {
     $prefix = 'Controllers\\';
     $baseDir = __DIR__ . '/../controllers/';

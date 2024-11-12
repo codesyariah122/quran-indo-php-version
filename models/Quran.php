@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author Puji Ermanto <pujiermanto@gmail.com>
+ * @return __construct
+ * */
+
 namespace Models;
 
 class Quran
@@ -55,9 +60,15 @@ class Quran
     {
         $listSurah = [];
         foreach ($this->data['data'] as $surah) {
+            $audioList = [];
+            foreach ($surah['verses'] as $verse) {
+                $audioList[] = $verse['audio']['primary'];
+            }
+
             $listSurah[] = [
                 'number' => $surah['number'],
-                'name' => $surah['name']
+                'name' => $surah['name'],
+                'audios' => $audioList
             ];
         }
         return $listSurah;

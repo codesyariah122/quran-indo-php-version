@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author Puji Ermanto <pujiermanto@gmail.com>
+ * @return __construct
+ * */
+
 namespace Controllers;
 
 use Models\Quran;
@@ -69,6 +74,7 @@ class QuranController
         try {
             header('Content-Type: application/json');
             $data = $this->quran->listSurah();
+            
             echo json_encode([
                 'author' => 'Puji Ermanto <pujiermanto@gmail.com>',
                 'message' => 'Fetch list surah',

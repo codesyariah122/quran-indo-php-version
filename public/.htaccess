@@ -1,10 +1,16 @@
 RewriteEngine On
 
-# Redirect semua permintaan ke /home jika tidak ada path lainnya
+# Jika permintaan adalah root, arahkan ke /home
 RewriteCond %{REQUEST_URI} ^/$
 RewriteRule ^$ /home [R=301,L]
 
-# Redirect semua permintaan ke index.php (untuk routing custom)
+# Redirect semua permintaan ke index.php untuk routing custom, jika file atau direktori tidak ada
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Jika tidak ada endpoint yang sesuai, arahkan ke /home
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/home
+RewriteRule ^.*$ /home [R=302,L]
